@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block crud_container %}
+    {% if users and users|length > 0 %}
+        {% if users|length == 1 %}
+            <article class="card container fluid"><br>
+                <h2>User Details</h2>
+                <p>ID: {{ users[0].id }}</p>
+                <p>Username: {{ users[0].username }}</p>
+                <p>Age: {{ users[0].age }}</p>
+            </article>
+        {% else %}
+            <section class="container-fluid">
+                <h2 align="center">Users</h2>
+                <br>
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        {% for user in users %}
+                            <li>
+                                <a href="/user/{{ user.id }}">{{ user.username }}</a> ({{ user.age }} years old)
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        {% endif %}
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+{% endblock %}
